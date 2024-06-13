@@ -1,0 +1,6 @@
+name: NormalConversions
+version: '1.0-SNAPSHOT'
+main: nuclearkat.normalconversions.NormalConversions
+api-version: 1.20
+depend:
+  - Vault
