@@ -3,14 +3,12 @@ package nuclearkat.normalconversions;
 import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.command.ConversionCommand;
 import nuclearkat.normalconversions.command.UpdateRatesCommand;
-import nuclearkat.normalconversions.inventories.Button;
 import nuclearkat.normalconversions.inventories.InventoryManager;
 import nuclearkat.normalconversions.listeners.AppleConversionListener;
 import nuclearkat.normalconversions.listeners.ConversionMenuListener;
 import nuclearkat.normalconversions.listeners.ExpConversionListener;
 import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,8 +40,13 @@ public final class NormalConversions extends JavaPlugin {
         this.inventoryManager = new InventoryManager(conversionRates);
         getConfig().addDefault("rates.apple.rate", 0.2);
         getConfig().addDefault("rates.apple.rate_threshold", 50000);
+        getConfig().addDefault("rates.money.apple.rate", 0.08);
+        getConfig().addDefault("rates.money.apple.rate_threshold", 5000);
+
         getConfig().addDefault("rates.exp.rate", 0.08);
         getConfig().addDefault("rates.exp.rate_threshold", 20000);
+        getConfig().addDefault("rates.money.level.rate", 0.02);
+        getConfig().addDefault("rates.money.level.rate_threshold", 5000);
         saveConfig();
     }
 

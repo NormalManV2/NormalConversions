@@ -108,7 +108,7 @@ public class AppleConversionListener implements Listener {
     }
 
     private double calculateCost(Player player, int apples){
-        double rate = conversionRates.getPlayerAppleRate(player.getUniqueId());
+        double rate = conversionRates.getPlayerMoneyToAppleRate(player.getUniqueId());
         return rate * apples;
     }
 

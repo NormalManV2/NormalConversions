@@ -8,27 +8,45 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ConversionRates {
 
-    private final double baseAppleRate;
-    private final double appleRateThreshold;
+    private final double baseMoneyToAppleRate;
+    private final double moneyToAppleRateThreshold;
 
-    private final double baseLevelRate;
-    private final double levelRateThreshold;
+    private final double baseAppleToMoneyRate;
+    private final double appleToMoneyRateThreshold;
+
+    private final double baseMoneyToLevelRate;
+    private final double levelToMoneyRateThreshold;
+
+    private final double baseLevelToMoneyRate;
+    private final double moneyToLevelRateThreshold;
 
     private final NormalConversions normalConversions;
 
-    private final HashMap<UUID, Double> playerAppleRates = new HashMap<>();
-    private final HashMap<UUID, Double> playerExpLevelRates = new HashMap<>();
+    private final Map<UUID, Double> playerMoneyToAppleRates = new HashMap<>();
+    private final Map<UUID, Double> playerAppleToMoneyRates = new HashMap<>();
+
+    private final Map<UUID, Double> playerMoneyToLevelRates = new HashMap<>();
+    private final Map<UUID, Double> playerLevelToMoneyRates = new HashMap<>();
 
     public ConversionRates(NormalConversions normalConversions) {
         this.normalConversions = normalConversions;
-        this.baseAppleRate = normalConversions.getConfig().getDouble("rates.apple.rate", 0.2);
-        this.appleRateThreshold = normalConversions.getConfig().getDouble("rates.apple.rate_threshold", 50000);
-        this.baseLevelRate = normalConversions.getConfig().getDouble("rates.exp.rate", 0.08);
-        this.levelRateThreshold = normalConversions.getConfig().getDouble("rates.exp.rate_threshold", 20000);
+        this.baseMoneyToAppleRate = normalConversions.getConfig().getDouble("rates.apple.rate", 0.2);
+        this.moneyToAppleRateThreshold = normalConversions.getConfig().getDouble("rates.apple.rate_threshold", 50000);
+
+        this.baseAppleToMoneyRate = normalConversions.getConfig().getDouble("rates.money.apple.rate", 0.08);
+        this.appleToMoneyRateThreshold = normalConversions.getConfig().getDouble("rates.money.apple.rate_threshold", 5000);
+
+        this.baseMoneyToLevelRate = normalConversions.getConfig().getDouble("rates.exp.rate", 0.08);
+        this.moneyToLevelRateThreshold = normalConversions.getConfig().getDouble("rates.exp.rate_threshold", 20000);
+
+        this.baseLevelToMoneyRate = normalConversions.getConfig().getDouble("rates.money.level.rate", 0.02);
+        this.levelToMoneyRateThreshold = normalConversions.getConfig().getDouble("rates.money.level.rate_threshold", 5000);
+
         updateConversionRates();
         startDailyConversionRate();
     }
@@ -46,8 +64,10 @@ public class ConversionRates {
 
     private void updateConversionRates(){
         for (OfflinePlayer player : Bukkit.getOfflinePlayers()){
-            playerAppleRates.put(player.getUniqueId(), calculatePlayerAppleRate((Player) player));
-            playerExpLevelRates.put(player.getUniqueId(), calculatePlayerLevelRate((Player) player));
+            playerMoneyToAppleRates.put(player.getUniqueId(), calculatePlayerMoneyToAppleRate((Player) player));
+            playerAppleToMoneyRates.put(player.getUniqueId(), calculatePlayerAppleToMoneyRate((Player) player));
+            playerMoneyToLevelRates.put(player.getUniqueId(), calculatePlayerMoneyToLevelRate((Player) player));
+            playerLevelToMoneyRates.put(player.getUniqueId(), calculatePlayerLevelToMoneyRate((Player) player));
         }
     }
 
@@ -68,25 +88,49 @@ public class ConversionRates {
         normalConversions.saveConfig();
     }
 
-    private double calculatePlayerAppleRate(Player player){
+
+
+    private double calculatePlayerMoneyToAppleRate(Player player){
         Economy economy = NormalConversions.getEconomy();
         double playerBalance = economy.getBalance(player);
-        double rate = playerBalance * this.baseAppleRate;
-        return Math.max(rate, this.appleRateThreshold);
+        double rate = playerBalance * this.baseMoneyToAppleRate;
+        return Math.max(rate, this.moneyToAppleRateThreshold);
     }
 
-    private double calculatePlayerLevelRate(Player player){
+    private double calculatePlayerAppleToMoneyRate(Player player){
         Economy economy = NormalConversions.getEconomy();
         double playerBalance = economy.getBalance(player);
-        double rate = playerBalance * this.baseLevelRate;
-        return Math.max(rate, this.levelRateThreshold);
+        double rate = playerBalance * this.baseAppleToMoneyRate;
+        return Math.max(rate, this.appleToMoneyRateThreshold);
     }
 
-    public double getPlayerAppleRate(UUID playerId){
-        return playerAppleRates.get(playerId);
+    private double calculatePlayerMoneyToLevelRate(Player player){
+        Economy economy = NormalConversions.getEconomy();
+        double playerBalance = economy.getBalance(player);
+        double rate = playerBalance * this.baseMoneyToLevelRate;
+        return Math.max(rate, this.moneyToLevelRateThreshold);
     }
 
-    public double getPlayerLevelRate(UUID playerId){
-        return playerExpLevelRates.get(playerId);
+    private double calculatePlayerLevelToMoneyRate(Player player){
+        Economy economy = NormalConversions.getEconomy();
+        double playerBalance = economy.getBalance(player);
+        double rate = playerBalance * this.baseLevelToMoneyRate;
+        return Math.max(rate, this.levelToMoneyRateThreshold);
+    }
+
+    public double getPlayerMoneyToAppleRate(UUID playerId){
+        return playerMoneyToAppleRates.get(playerId);
+    }
+
+    public double getPlayerAppleToMoneyRate(UUID playerId){
+        return playerAppleToMoneyRates.get(playerId);
+    }
+
+    public double getPlayerMoneyToLevelRate(UUID playerId){
+        return playerMoneyToLevelRates.get(playerId);
+    }
+
+    public double getPlayerLevelToMoneyRate(UUID playerId){
+        return playerLevelToMoneyRates.get(playerId);
     }
 }

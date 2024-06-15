@@ -105,7 +105,7 @@ public class ExpConversionListener implements Listener {
     }
 
     private double calculateCost(Player player, int levels){
-        double rate = conversionRates.getPlayerLevelRate(player.getUniqueId());
+        double rate = conversionRates.getPlayerMoneyToLevelRate(player.getUniqueId());
         return rate * levels;
     }
 
