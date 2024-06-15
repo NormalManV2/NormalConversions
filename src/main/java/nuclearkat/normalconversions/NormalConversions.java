@@ -3,19 +3,20 @@ package nuclearkat.normalconversions;
 import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.command.ConversionCommand;
 import nuclearkat.normalconversions.command.UpdateRatesCommand;
+import nuclearkat.normalconversions.inventories.Button;
 import nuclearkat.normalconversions.inventories.InventoryManager;
 import nuclearkat.normalconversions.listeners.AppleConversionListener;
 import nuclearkat.normalconversions.listeners.ConversionMenuListener;
 import nuclearkat.normalconversions.listeners.ExpConversionListener;
-import nuclearkat.normalconversions.transactions.ConversionRates;
+import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NormalConversions extends JavaPlugin {
 
-    private static Economy econ;
-
+    private static Economy ECON;
     private ConversionRates conversionRates;
     private InventoryManager inventoryManager;
 
@@ -30,7 +31,6 @@ public final class NormalConversions extends JavaPlugin {
         this.initializeRates();
         this.registerCommands();
         this.registerListeners();
-
     }
 
     @Override
@@ -46,6 +46,7 @@ public final class NormalConversions extends JavaPlugin {
         getConfig().addDefault("rates.exp.rate_threshold", 20000);
         saveConfig();
     }
+
     private void registerCommands(){
         new ConversionCommand(inventoryManager);
         new UpdateRatesCommand(conversionRates);
@@ -67,12 +68,12 @@ public final class NormalConversions extends JavaPlugin {
             System.out.println("Rsp not found! (econ)");
             return false;
         }
-        econ = rsp.getProvider();
+        ECON = rsp.getProvider();
         return true;
     }
 
     public static Economy getEconomy() {
-        return econ;
+        return ECON;
     }
 
 }

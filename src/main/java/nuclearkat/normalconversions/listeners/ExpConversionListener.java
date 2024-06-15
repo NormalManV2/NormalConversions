@@ -3,7 +3,7 @@ package nuclearkat.normalconversions.listeners;
 import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.NormalConversions;
 import nuclearkat.normalconversions.inventories.InventoryManager;
-import nuclearkat.normalconversions.transactions.ConversionRates;
+import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -52,8 +52,6 @@ public class ExpConversionListener implements Listener {
         playerBalance.putIfAbsent(player.getUniqueId(), economy.getBalance(player));
         double cachedBalance = this.playerBalance.get(player.getUniqueId());
         double currentBalance = economy.getBalance(player);
-
-
 
         if (cachedBalance != currentBalance){
             player.closeInventory();

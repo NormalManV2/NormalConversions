@@ -1,4 +1,4 @@
-package nuclearkat.normalconversions.transactions;
+package nuclearkat.normalconversions.conversion;
 
 import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.NormalConversions;
@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -19,8 +18,6 @@ public class ConversionRates {
     private final double baseLevelRate;
     private final double levelRateThreshold;
 
-    private BukkitTask dailyPlayerConversionRateTask;
-
     private final NormalConversions normalConversions;
 
     private final HashMap<UUID, Double> playerAppleRates = new HashMap<>();
@@ -32,6 +29,7 @@ public class ConversionRates {
         this.appleRateThreshold = normalConversions.getConfig().getDouble("rates.apple.rate_threshold", 50000);
         this.baseLevelRate = normalConversions.getConfig().getDouble("rates.exp.rate", 0.08);
         this.levelRateThreshold = normalConversions.getConfig().getDouble("rates.exp.rate_threshold", 20000);
+        updateConversionRates();
         startDailyConversionRate();
     }
 
@@ -40,7 +38,7 @@ public class ConversionRates {
     }
 
     private void scheduleDailyPlayerConversionRate(long delay){
-        this.dailyPlayerConversionRateTask = Bukkit.getScheduler().runTaskLater(normalConversions, () -> {
+        Bukkit.getScheduler().runTaskLater(normalConversions, () -> {
             updateConversionRates();
             scheduleDailyPlayerConversionRate(24L * 60L * 60L * 20L);
         }, delay);
@@ -91,5 +89,4 @@ public class ConversionRates {
     public double getPlayerLevelRate(UUID playerId){
         return playerExpLevelRates.get(playerId);
     }
-
 }

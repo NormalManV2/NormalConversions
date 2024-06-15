@@ -1,17 +1,13 @@
 package nuclearkat.normalconversions.inventories;
 
-import nuclearkat.normalconversions.transactions.ConversionRates;
+import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryManager {
 
@@ -29,88 +25,31 @@ public class InventoryManager {
         Inventory appleConversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&4Apple Conversion Menu"));
         NumberFormat numberFormat = NumberFormat.getInstance();
 
+        Button addSingleAppleButton = new Button(Material.GREEN_WOOL, "&a [+] &f: &4Apple", "&7Click to add one apple to your purchase!");
+        Button add16ApplesButton = new Button(Material.GREEN_WOOL, "&a [+] &7<&a16&7> &f: &4Apples", "&7Click to add 16 apples to your purchase!");
+        Button removeSingleAppleButton = new Button(Material.RED_WOOL, "&c [-] &f: &4Apple", "&7Click to remove one apple from your purchase!");
+        Button remove16ApplesButton = new Button(Material.RED_WOOL, "&c [-] &7<&c16&7> &f: &4Apples", "&7Click to remove 16 apples to your purchase!");
+        Button appleAmountButton = new Button(Material.APPLE, "&4Apple : &f" + appleAmount);
+        Button appleConversionRateButton = new Button(Material.ENCHANTED_BOOK, "&cApple &fConversion Rate:", "&7[ &f1 : %appleRate% &7]".replace("%appleRate%", numberFormat.format(conversionRates.getPlayerAppleRate(player.getUniqueId()))));
+        Button buyButton = new Button(Material.GREEN_STAINED_GLASS_PANE, "&cClick To Buy!", "&7 [ &c%cost% &7] ".replace("%cost%", numberFormat.format(cost)));
+        Button backButton = new Button(Material.RED_STAINED_GLASS_PANE, "&cBack", "&7Click to go back to the previous menu!");
+        Button border = new Button(Material.GRAY_STAINED_GLASS_PANE, " ");
 
-        ItemStack addSingleAppleButton = new ItemStack(Material.GREEN_WOOL);
-        ItemMeta addSingleAppleButtonMeta = addSingleAppleButton.getItemMeta();
-        addSingleAppleButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a [+] &f: &4Apple"));
-        List<String> addAppleButtonLore = new ArrayList<>();
-        addAppleButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to add one apple to your purchase!"));
-        addSingleAppleButtonMeta.setLore(addAppleButtonLore);
-        addSingleAppleButton.setItemMeta(addSingleAppleButtonMeta);
-
-        ItemStack add16ApplesButton = new ItemStack(Material.GREEN_WOOL);
-        ItemMeta add16ApplesButtonMeta = add16ApplesButton.getItemMeta();
-        add16ApplesButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a [+] &7<&a16&7> &f: &4Apples"));
-        List<String> add16ApplesButtonLore = new ArrayList<>();
-        add16ApplesButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to add 16 apples to your purchase!"));
-        add16ApplesButtonMeta.setLore(add16ApplesButtonLore);
-        add16ApplesButton.setItemMeta(add16ApplesButtonMeta);
-
-        ItemStack removeSingleAppleButton = new ItemStack(Material.RED_WOOL);
-        ItemMeta removeSingleAppleButtonMeta = removeSingleAppleButton.getItemMeta();
-        removeSingleAppleButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c [-] &f: &4Apple"));
-        List<String> removeSingleAppleButtonLore = new ArrayList<>();
-        removeSingleAppleButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to remove one apple from your purchase!"));
-        removeSingleAppleButtonMeta.setLore(removeSingleAppleButtonLore);
-        removeSingleAppleButton.setItemMeta(removeSingleAppleButtonMeta);
-
-        ItemStack remove16AppleButton = new ItemStack(Material.RED_WOOL);
-        ItemMeta remove16AppleButtonMeta = remove16AppleButton.getItemMeta();
-        remove16AppleButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c [-] &7<&c16&7> &f: &4Apples"));
-        List<String> remove16AppleButtonLore = new ArrayList<>();
-        remove16AppleButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to remove 16 apples to your purchase!"));
-        remove16AppleButtonMeta.setLore(remove16AppleButtonLore);
-        remove16AppleButton.setItemMeta(remove16AppleButtonMeta);
-
-        ItemStack appleAmountButton = new ItemStack(Material.APPLE);
-        ItemMeta appleAmountButtonMeta = appleAmountButton.getItemMeta();
-        appleAmountButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Apple : &f" + appleAmount));
-        appleAmountButton.setItemMeta(appleAmountButtonMeta);
-
-        ItemStack appleConversionRate = new ItemStack(Material.ENCHANTED_BOOK);
-        ItemMeta conversionRateMeta = appleConversionRate.getItemMeta();
-        conversionRateMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cApple &fConversion Rate:"));
-        List<String> conversionRateLore = new ArrayList<>();
-        conversionRateLore.add(ChatColor.translateAlternateColorCodes('&', "&7[ &f1 : %appleRate% &7]").replace("%appleRate%", numberFormat.format(conversionRates.getPlayerAppleRate(player.getUniqueId()))));
-        conversionRateMeta.setLore(conversionRateLore);
-        appleConversionRate.setItemMeta(conversionRateMeta);
-
-        ItemStack buyButton = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-        ItemMeta buyButtonMeta = buyButton.getItemMeta();
-        buyButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cClick To Buy!"));
-        List<String> buyButtonLore = new ArrayList<>();
-        buyButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7 [ &c%cost% &7] ").replace("%cost%", numberFormat.format(cost)));
-        buyButtonMeta.setLore(buyButtonLore);
-        buyButton.setItemMeta(buyButtonMeta);
-
-        ItemStack  backButton = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta backButtonMeta = backButton.getItemMeta();
-        backButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cClose"));
-        List<String> backButtonLore = new ArrayList<>();
-        backButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to close this menu!"));
-        backButtonMeta.setLore(backButtonLore);
-        backButton.setItemMeta(backButtonMeta);
-
-        ItemStack border = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta borderMeta = border.getItemMeta();
-        borderMeta.setDisplayName(" ");
-        border.setItemMeta(borderMeta);
-
-        appleConversionMenu.setItem(11, remove16AppleButton);
-        appleConversionMenu.setItem(12, removeSingleAppleButton);
-        appleConversionMenu.setItem(13, appleAmountButton);
-        appleConversionMenu.setItem(14, addSingleAppleButton);
-        appleConversionMenu.setItem(15, add16ApplesButton);
+        appleConversionMenu.setItem(11, remove16ApplesButton.getItemStack());
+        appleConversionMenu.setItem(12, removeSingleAppleButton.getItemStack());
+        appleConversionMenu.setItem(13, appleAmountButton.getItemStack());
+        appleConversionMenu.setItem(14, addSingleAppleButton.getItemStack());
+        appleConversionMenu.setItem(15, add16ApplesButton.getItemStack());
 
 
         for (int i = 0; i < appleConversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
-                appleConversionMenu.setItem(i, border);
+                appleConversionMenu.setItem(i, border.getItemStack());
             }
         }
-        appleConversionMenu.setItem(4, appleConversionRate);
-        appleConversionMenu.setItem(22, buyButton);
-        appleConversionMenu.setItem(26, backButton);
+        appleConversionMenu.setItem(4, appleConversionRateButton.getItemStack());
+        appleConversionMenu.setItem(22, buyButton.getItemStack());
+        appleConversionMenu.setItem(26, backButton.getItemStack());
         return appleConversionMenu;
     }
 
@@ -120,88 +59,31 @@ public class InventoryManager {
         Inventory expConversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&cExp Conversion Menu"));
         NumberFormat numberFormat = NumberFormat.getInstance();
 
+        Button levelAmountButton = new Button(Material.EXPERIENCE_BOTTLE, "&4Exp Levels : &f" + expAmount);
+        Button remove16LevelsButton = new Button(Material.RED_WOOL, "&c [-] &7<&c16&7> &f: &4Exp Levels", "&7Click to remove 16 exp levels to your purchase!");
+        Button removeSingleLevelButton = new Button(Material.RED_WOOL, "&c [-] &f: &4Exp Level", "&7Click to remove one exp level from your purchase!");
+        Button addSingleLevelButton = new Button(Material.GREEN_WOOL, "&a [+] &f: &4Exp Level", "&7Click to add one exp level to your purchase!");
+        Button add16LevelsButton = new Button(Material.GREEN_WOOL, "&a [+] &7<&a16&7> &f: &4Exp Levels", "&7Click to add 16 exp levels to your purchase!");
+        Button conversionRateButton = new Button(Material.ENCHANTED_BOOK, "&cExp Level &fConversion Rate:", "&7[ &f1 : %levelRate% &7]".replace("%levelRate%", numberFormat.format(conversionRates.getPlayerLevelRate(player.getUniqueId()))));
+        Button buyButton = new Button(Material.GREEN_STAINED_GLASS_PANE, "&cClick To Buy!", "&7 [ &c%cost% &7] ".replace("%cost%", numberFormat.format(cost)));
+        Button backButton = new Button(Material.RED_STAINED_GLASS_PANE, "&cBack", "&7Click to go back to the previous menu!");
+        Button border = new Button(Material.GRAY_STAINED_GLASS_PANE, " ");
 
-        ItemStack addSingleLevelButton = new ItemStack(Material.GREEN_WOOL);
-        ItemMeta addSingleLevelButtonMeta = addSingleLevelButton.getItemMeta();
-        addSingleLevelButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a [+] &f: &4Exp Level"));
-        List<String> addLevelButtonLore = new ArrayList<>();
-        addLevelButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to add one exp level to your purchase!"));
-        addSingleLevelButtonMeta.setLore(addLevelButtonLore);
-        addSingleLevelButton.setItemMeta(addSingleLevelButtonMeta);
-
-        ItemStack add16LevelsButton = new ItemStack(Material.GREEN_WOOL);
-        ItemMeta add16LevelsButtonMeta = add16LevelsButton.getItemMeta();
-        add16LevelsButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a [+] &7<&a16&7> &f: &4Exp Levels"));
-        List<String> add16LevelsButtonLore = new ArrayList<>();
-        add16LevelsButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to add 16 exp levels to your purchase!"));
-        add16LevelsButtonMeta.setLore(add16LevelsButtonLore);
-        add16LevelsButton.setItemMeta(add16LevelsButtonMeta);
-
-        ItemStack removeSingleLevelButton = new ItemStack(Material.RED_WOOL);
-        ItemMeta removeSingleLevelButtonMeta = removeSingleLevelButton.getItemMeta();
-        removeSingleLevelButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c [-] &f: &4Exp Level"));
-        List<String> removeSingleLevelButtonLore = new ArrayList<>();
-        removeSingleLevelButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to remove one exp level from your purchase!"));
-        removeSingleLevelButtonMeta.setLore(removeSingleLevelButtonLore);
-        removeSingleLevelButton.setItemMeta(removeSingleLevelButtonMeta);
-
-        ItemStack remove16LevelsButton = new ItemStack(Material.RED_WOOL);
-        ItemMeta remove16LevelsButtonMeta = remove16LevelsButton.getItemMeta();
-        remove16LevelsButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c [-] &7<&c16&7> &f: &4Exp Levels"));
-        List<String> remove16LevelsButtonLore = new ArrayList<>();
-        remove16LevelsButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to remove 16 exp levels to your purchase!"));
-        remove16LevelsButtonMeta.setLore(remove16LevelsButtonLore);
-        remove16LevelsButton.setItemMeta(remove16LevelsButtonMeta);
-
-        ItemStack levelAmountButton = new ItemStack(Material.APPLE);
-        ItemMeta levelAmountButtonMeta = levelAmountButton.getItemMeta();
-        levelAmountButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Exp Levels : &f" + expAmount));
-        levelAmountButton.setItemMeta(levelAmountButtonMeta);
-
-        ItemStack levelConversionRate = new ItemStack(Material.ENCHANTED_BOOK);
-        ItemMeta conversionRateMeta = levelConversionRate.getItemMeta();
-        conversionRateMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cExp Level &fConversion Rate:"));
-        List<String> conversionRateLore = new ArrayList<>();
-        conversionRateLore.add(ChatColor.translateAlternateColorCodes('&', "&7[ &f1 : %levelRate% &7]").replace("%levelRate%", numberFormat.format(conversionRates.getPlayerLevelRate(player.getUniqueId()))));
-        conversionRateMeta.setLore(conversionRateLore);
-        levelConversionRate.setItemMeta(conversionRateMeta);
-
-        ItemStack buyButton = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-        ItemMeta buyButtonMeta = buyButton.getItemMeta();
-        buyButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cClick To Buy!"));
-        List<String> buyButtonLore = new ArrayList<>();
-        buyButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7 [ &c%cost% &7] ").replace("%cost%", numberFormat.format(cost)));
-        buyButtonMeta.setLore(buyButtonLore);
-        buyButton.setItemMeta(buyButtonMeta);
-
-        ItemStack  backButton = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta backButtonMeta = backButton.getItemMeta();
-        backButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cBack"));
-        List<String> backButtonLore = new ArrayList<>();
-        backButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to go back to the previous menu!"));
-        backButtonMeta.setLore(backButtonLore);
-        backButton.setItemMeta(backButtonMeta);
-
-        ItemStack border = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta borderMeta = border.getItemMeta();
-        borderMeta.setDisplayName(" ");
-        border.setItemMeta(borderMeta);
-
-        expConversionMenu.setItem(11, remove16LevelsButton);
-        expConversionMenu.setItem(12, removeSingleLevelButton);
-        expConversionMenu.setItem(13, levelAmountButton);
-        expConversionMenu.setItem(14, addSingleLevelButton);
-        expConversionMenu.setItem(15, add16LevelsButton);
+        expConversionMenu.setItem(11, remove16LevelsButton.getItemStack());
+        expConversionMenu.setItem(12, removeSingleLevelButton.getItemStack());
+        expConversionMenu.setItem(13, levelAmountButton.getItemStack());
+        expConversionMenu.setItem(14, addSingleLevelButton.getItemStack());
+        expConversionMenu.setItem(15, add16LevelsButton.getItemStack());
 
 
         for (int i = 0; i < expConversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
-                expConversionMenu.setItem(i, border);
+                expConversionMenu.setItem(i, border.getItemStack());
             }
         }
-        expConversionMenu.setItem(4, levelConversionRate);
-        expConversionMenu.setItem(22, buyButton);
-        expConversionMenu.setItem(26, backButton);
+        expConversionMenu.setItem(4, conversionRateButton.getItemStack());
+        expConversionMenu.setItem(22, buyButton.getItemStack());
+        expConversionMenu.setItem(26, backButton.getItemStack());
 
 
         return expConversionMenu;
@@ -210,50 +92,22 @@ public class InventoryManager {
     private Inventory conversionMenu(){
         Inventory conversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&cConversion Menu"));
 
-        ItemStack buyApplesButton = new ItemStack(Material.APPLE);
-        ItemMeta buyApplesButtonMeta = buyApplesButton.getItemMeta();
-        buyApplesButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Buy Apple Conversion"));
-        List<String> buyAppleButtonLore = new ArrayList<>();
-        buyAppleButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to convert your money to apples!"));
-        buyApplesButtonMeta.setLore(buyAppleButtonLore);
-        buyApplesButton.setItemMeta(buyApplesButtonMeta);
+        Button buyApplesButton = new Button(Material.APPLE, "&4Buy Apple Conversion", "&7Click to convert your money to apples!");
+        Button sellApplesButton = new Button(Material.APPLE, "&4Sell Apple Conversion", "&7Click to convert your apples to money!");
+        Button buyExpButton = new Button(Material.EXPERIENCE_BOTTLE, "&aBuy exp Conversion", "&7Click here to convert your money to exp levels!");
+        Button sellExpButton = new Button(Material.EXPERIENCE_BOTTLE, "&aSell Exp Conversion", "&7Click here to convert your exp levels into money!");
+        Button closeButton = new Button(Material.RED_STAINED_GLASS_PANE, "&cClose", "&7Click to close this menu!");
+        Button border = new Button(Material.GRAY_STAINED_GLASS_PANE, " ");
 
-        ItemStack sellApplesButton = new ItemStack(Material.APPLE);
-        ItemMeta sellApplesButtonMeta = sellApplesButton.getItemMeta();
-        sellApplesButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Sell Apple Conversion"));
-        List<String> sellApplesButtonLore = new ArrayList<>();
-        sellApplesButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to convert your money to apples!"));
-        sellApplesButtonMeta.setLore(sellApplesButtonLore);
-        sellApplesButton.setItemMeta(sellApplesButtonMeta);
+        conversionMenu.setItem(11, sellApplesButton.getItemStack());
+        conversionMenu.setItem(12, buyApplesButton.getItemStack());
+        conversionMenu.setItem(13, closeButton.getItemStack());
+        conversionMenu.setItem(14, buyExpButton.getItemStack());
+        conversionMenu.setItem(15, sellExpButton.getItemStack());
 
-        ItemStack expButton = new ItemStack(Material.EXPERIENCE_BOTTLE);
-        ItemMeta expButtonMeta = expButton.getItemMeta();
-        expButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aExp Conversion"));
-        List<String> expButtonLore = new ArrayList<>();
-        expButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click here to convert your money to exp levels!"));
-        expButtonMeta.setLore(expButtonLore);
-        expButton.setItemMeta(expButtonMeta);
-
-        ItemStack closeButton = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta closeButtonMeta = closeButton.getItemMeta();
-        closeButtonMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cClose"));
-        List<String> closeButtonLore = new ArrayList<>();
-        closeButtonLore.add(ChatColor.translateAlternateColorCodes('&', "&7Click to close this menu!"));
-        closeButtonMeta.setLore(closeButtonLore);
-        closeButton.setItemMeta(closeButtonMeta);
-
-        ItemStack border = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta borderMeta = border.getItemMeta();
-        borderMeta.setDisplayName(" ");
-        border.setItemMeta(borderMeta);
-
-        conversionMenu.setItem(11, sellApplesButton);
-        conversionMenu.setItem(12, buyApplesButton);
-        conversionMenu.setItem(13, closeButton);
-        conversionMenu.setItem(14, expButton);
         for (int i = 0; i < conversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
-                conversionMenu.setItem(i, border);
+                conversionMenu.setItem(i, border.getItemStack());
             }
         }
         return conversionMenu;

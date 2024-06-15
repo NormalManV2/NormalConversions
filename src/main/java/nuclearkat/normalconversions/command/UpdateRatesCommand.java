@@ -1,6 +1,6 @@
 package nuclearkat.normalconversions.command;
 
-import nuclearkat.normalconversions.transactions.ConversionRates;
+import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -2,8 +2,8 @@ nuclearkat\normalconversions\command\UpdateRatesCommand.class
 nuclearkat\normalconversions\inventories\InventoryManager.class
 nuclearkat\normalconversions\listeners\ConversionMenuListener.class
 nuclearkat\normalconversions\command\AbstractCommand.class
+nuclearkat\normalconversions\conversion\ConversionRates.class
 nuclearkat\normalconversions\listeners\ExpConversionListener.class
 nuclearkat\normalconversions\NormalConversions.class
 nuclearkat\normalconversions\listeners\AppleConversionListener.class
-nuclearkat\normalconversions\transactions\ConversionRates.class
 nuclearkat\normalconversions\command\ConversionCommand.class

@@ -3,7 +3,7 @@ package nuclearkat.normalconversions.listeners;
 import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.NormalConversions;
 import nuclearkat.normalconversions.inventories.InventoryManager;
-import nuclearkat.normalconversions.transactions.ConversionRates;
+import nuclearkat.normalconversions.conversion.ConversionRates;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -60,6 +60,7 @@ public class AppleConversionListener implements Listener {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYour balance has changed during this conversion, please try again!"));
             return;
         }
+
 
         handleInteraction(event.getRawSlot(), player);
     }
@@ -130,4 +131,6 @@ public class AppleConversionListener implements Listener {
         player.closeInventory();
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aConverted &f" + numberFormat.format(cost) + " money to " + apples + "&c apples!"));
     }
+
+
 }
