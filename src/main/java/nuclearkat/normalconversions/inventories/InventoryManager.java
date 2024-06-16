@@ -46,7 +46,16 @@ public class InventoryManager {
         this.conversionRates = conversionRates;
     }
 
-    private Inventory appleConversionMenu(int appleAmount, double cost, Player player){
+
+    /**
+     * Money To Apple Conversion Menu
+     *
+     * @param appleAmount The amount of apples to display.
+     * @param cost The cost of how many apples.
+     * @param player We get the player here to display the correct conversion rate.
+     * @return Returns the created inventory.
+     */
+    private Inventory moneyToAppleConversionMenu(int appleAmount, double cost, Player player){
         this.appleAmount = appleAmount;
 
         Inventory appleConversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&4Apple Conversion Menu"));
@@ -74,7 +83,38 @@ public class InventoryManager {
         return appleConversionMenu;
     }
 
-    private Inventory expConversionMenu(int expAmount, double cost, Player player){
+
+    /**
+     * Apple To Money Conversion Menu
+     *
+     * @param moneyAmount The amount of money to display.
+     * @param cost The cost in apples of this money.
+     * @param player We get the player here to display the correct conversion rate.
+     * @return Returns the created inventory.
+     */
+    private Inventory appleToMoneyConversionMenu(int moneyAmount, double cost, Player player){
+        this.appleAmount = moneyAmount;
+
+        Inventory appleConversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&4Money -> Apple Conversion Menu"));
+        NumberFormat numberFormat = NumberFormat.getInstance();
+
+        Button moneyAmountButton = new Button(Material.IRON_INGOT, "&4Money : &f" + moneyAmount);
+        Button moneyConversionRateButton = new Button(Material.ENCHANTED_BOOK, "&cApple &fConversion Rate:", "&7[ &f1 : %appleRate% &7]".replace("%appleRate%", numberFormat.format(conversionRates.getPlayerMoneyToAppleRate(player.getUniqueId()))));
+        Button buyButton = new Button(Material.GREEN_STAINED_GLASS_PANE, "&cClick To Buy!", "&7 [ &c%cost% &7] ".replace("%cost%", numberFormat.format(cost)));
+
+        return appleConversionMenu;
+    }
+
+
+    /**
+     * Money To Exp Conversion Menu
+     *
+     * @param expAmount The amount of exp to display.
+     * @param cost The cost of how much exp.
+     * @param player We get the player here to display the correct rate.
+     * @return Returns the created inventory.
+     */
+    private Inventory moneyToExpConversionMenu(int expAmount, double cost, Player player){
         this.expAmount = expAmount;
 
         Inventory expConversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&cExp Conversion Menu"));
@@ -104,6 +144,12 @@ public class InventoryManager {
         return expConversionMenu;
     }
 
+
+    /**
+     * Conversion Menu
+     * Utility inventory to hold the conversion options.
+     * @return Returns the created inventory.
+     */
     private Inventory conversionMenu(){
         Inventory conversionMenu = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&cConversion Menu"));
 
@@ -122,11 +168,11 @@ public class InventoryManager {
     }
 
     public Inventory getAppleConversionMenu(int appleAmount, double cost, Player player){
-        return appleConversionMenu(appleAmount, cost, player);
+        return moneyToAppleConversionMenu(appleAmount, cost, player);
     }
 
     public Inventory getExpConversionMenu(int expAmount, double cost, Player player){
-        return expConversionMenu(expAmount, cost, player);
+        return moneyToExpConversionMenu(expAmount, cost, player);
     }
 
     public Inventory getConversionMenu(){

@@ -31,7 +31,7 @@ public class AppleConversionListener implements Listener {
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event){
-        if (!event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "&4Apple Conversion Menu"))){
+        if (!event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "&4Apple Conversion Menu")) || !event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', "&4Money -> Apple Conversion Menu"))){
             return;
         }
         Player player = (Player) event.getPlayer();
