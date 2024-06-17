@@ -7,7 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-// edit
 
 public class Button {
 
@@ -44,9 +43,5 @@ public class Button {
     public Material getMaterialType() {
         return materialType;
     }
-
-
-
-
 
 }

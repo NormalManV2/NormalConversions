@@ -53,8 +53,6 @@ public class AppleConversionListener implements Listener {
         double cachedBalance = this.playerBalance.get(player.getUniqueId());
         double currentBalance = economy.getBalance(player);
 
-
-
         if (cachedBalance != currentBalance){
             player.closeInventory();
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYour balance has changed during this conversion, please try again!"));
@@ -84,16 +82,10 @@ public class AppleConversionListener implements Listener {
                 player.openInventory(inventoryManager.getAppleConversionMenu(appleAmount, calculateCost(player, appleAmount), player));
             }
             case 14 ->{
-                if (appleAmount + 1 > 64){
-                    return;
-                }
                 appleAmount += 1;
                 player.openInventory(inventoryManager.getAppleConversionMenu(appleAmount, calculateCost(player, appleAmount), player));
             }
             case 15 -> {
-                if (appleAmount + 16 > 64){
-                    return;
-                }
                 appleAmount += 16;
                 player.openInventory(inventoryManager.getAppleConversionMenu(appleAmount, calculateCost(player, appleAmount), player));
             }

@@ -46,7 +46,6 @@ public class InventoryManager {
         this.conversionRates = conversionRates;
     }
 
-
     /**
      * Money To Apple Conversion Menu
      *
@@ -71,18 +70,19 @@ public class InventoryManager {
         appleConversionMenu.setItem(14, ADD_SINGLE_APPLE_BUTTON.getItemStack());
         appleConversionMenu.setItem(15, ADD_16_APPLES_BUTTON.getItemStack());
 
-
+        // Gives us a border like appearance surrounding the other buttons.
         for (int i = 0; i < appleConversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
                 appleConversionMenu.setItem(i, BORDER.getItemStack());
             }
         }
+
+        // Set the buttons after the border buttons are placed, as these buttons are placed in spots of borders.
         appleConversionMenu.setItem(4, appleConversionRateButton.getItemStack());
         appleConversionMenu.setItem(22, buyButton.getItemStack());
         appleConversionMenu.setItem(26, BACK_BUTTON.getItemStack());
         return appleConversionMenu;
     }
-
 
     /**
      * Apple To Money Conversion Menu
@@ -104,7 +104,6 @@ public class InventoryManager {
 
         return appleConversionMenu;
     }
-
 
     /**
      * Money To Exp Conversion Menu
@@ -130,20 +129,20 @@ public class InventoryManager {
         expConversionMenu.setItem(14, ADD_SINGLE_LEVEL_BUTTON.getItemStack());
         expConversionMenu.setItem(15, ADD_16_LEVELS_BUTTON.getItemStack());
 
-
+        // Gives us a border like appearance surrounding the other buttons.
         for (int i = 0; i < expConversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
                 expConversionMenu.setItem(i, BORDER.getItemStack());
             }
         }
+
+        // Set the buttons after the border buttons are placed, as these buttons are placed in spots of borders.
         expConversionMenu.setItem(4, conversionRateButton.getItemStack());
         expConversionMenu.setItem(22, buyButton.getItemStack());
         expConversionMenu.setItem(26, BACK_BUTTON.getItemStack());
 
-
         return expConversionMenu;
     }
-
 
     /**
      * Conversion Menu
@@ -159,6 +158,7 @@ public class InventoryManager {
         conversionMenu.setItem(14, BUY_EXP_BUTTON.getItemStack());
         conversionMenu.setItem(15, SELL_EXP_BUTTON.getItemStack());
 
+        // Gives us a border like appearance surrounding the other buttons.
         for (int i = 0; i < conversionMenu.getSize(); i++){
             if (i < 10 || i > 16){
                 conversionMenu.setItem(i, BORDER.getItemStack());
