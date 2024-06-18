@@ -1,11 +1,12 @@
-C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\transactions\ConversionRates.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\command\ConversionCommand.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\conversion\ConversionInterface.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\command\AbstractCommand.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\conversion\MoneyToAppleConversionInterface.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\inventories\InventoryManager.java
-C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\command\RandomizeRatesCommand.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\conversion\AppleToMoneyConversionInterface.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\inventories\Button.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\listeners\ConversionMenuListener.java
-C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\transactions\EconomyUtils.java
-C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\listeners\ExpConversionListener.java
-C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\transactions\ExpConversion.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\command\UpdateRatesCommand.java
+C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\conversion\ConversionRates.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\listeners\AppleConversionListener.java
 C:\Users\ronan\Downloads\NormalConversions\src\main\java\nuclearkat\normalconversions\NormalConversions.java

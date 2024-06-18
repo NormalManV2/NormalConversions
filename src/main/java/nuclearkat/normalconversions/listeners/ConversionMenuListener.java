@@ -23,8 +23,8 @@ public class ConversionMenuListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         int clickedSlot = event.getRawSlot();
         switch (clickedSlot){
-            case 12 -> player.openInventory(inventoryManager.getAppleConversionMenu(0, 0, player));
-            case 14 -> player.openInventory(inventoryManager.getExpConversionMenu(0, 0, player));
+            case 14 -> player.openInventory(inventoryManager.getMoneyToAppleConversionMenu(0, 0, player));
+            case 12 -> player.openInventory(inventoryManager.getAppleToMoneyConversionMenu(0, 0, player));
             default -> player.closeInventory();
         }
     }

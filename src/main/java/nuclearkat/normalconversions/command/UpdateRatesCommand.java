@@ -16,12 +16,8 @@ public class UpdateRatesCommand extends AbstractCommand {
         this.conversionRates = conversionRates;
     }
 
-    private void handleLevelRateUpdate(double rateChage, double rateThresholdChange){
-        conversionRates.updateLevelRates(rateChage, rateThresholdChange);
-    }
-
-    private void handleAppleRateUpdate(double rateChange, double rateThresholdChange){
-        conversionRates.updateAppleRates(rateChange, rateThresholdChange);
+    private void handleAppleRateUpdate(double rateChange){
+        conversionRates.updateAppleRates(rateChange);
     }
 
     @Override
@@ -35,20 +31,13 @@ public class UpdateRatesCommand extends AbstractCommand {
             return;
         }
         Player player = (Player) sender;
-        if (args.length > 3){
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c Incorrect usage! Please use <nsave || ncs || ncsave || ratesave> <appleRate || levelRate> <rate> <rateThreshold>"));
+        if (args.length > 2){
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c Incorrect usage! Please use <nsave || ncs || ncsave || ratesave> <sell_rate> "));
             return;
         }
-        if (!args[0].equalsIgnoreCase("levelRate") || args[0].equalsIgnoreCase("appleRate")){
-            double rateChange = Double.parseDouble(args[1]);
-            double rateThresholdChange = Double.parseDouble(args[2]);
-            handleAppleRateUpdate(rateChange, rateThresholdChange);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cApple rates have been updated!"));
-            return;
-        }
-        double rateChange = Double.parseDouble(args[1]);
-        double rateThresholdChange = Double.parseDouble(args[2]);
-        handleLevelRateUpdate(rateChange, rateThresholdChange);
+
+        double rateChange = Double.parseDouble(args[0]);
+        handleAppleRateUpdate(rateChange);
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cLevel rates have been updated!"));
     }
 
