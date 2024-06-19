@@ -31,7 +31,7 @@ public class ConversionCommand extends AbstractCommand {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cIncorrect Usage! Please use : <nc || nconversion || convert>"));
             return;
         }
-        player.openInventory(inventoryManager.getConversionMenu());
+        inventoryManager.openChooseConversionMenu(player);
     }
 
     @Override
