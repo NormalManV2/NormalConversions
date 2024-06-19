@@ -1,19 +1,15 @@
 package nuclearkat.normalconversions.listeners;
 
-import net.milkbowl.vault.economy.Economy;
 import nuclearkat.normalconversions.NormalConversions;
 import nuclearkat.normalconversions.conversion.ConversionRates;
 import nuclearkat.normalconversions.conversion.PlayerConversion;
 import nuclearkat.normalconversions.currency.Currency;
 import nuclearkat.normalconversions.inventories.InventoryManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 
 import java.util.regex.Pattern;
 
@@ -21,19 +17,7 @@ import static nuclearkat.normalconversions.util.Util.f;
 
 public class ConversionListener implements Listener {
 
-//    private final Map<UUID, Double> playerBalance = new HashMap<>();
-
     private static final Pattern MENU_REGEX = Pattern.compile(ChatColor.translateAlternateColorCodes('&', "&4Convert \\w+ to \\w+ Menu"));
-
-    @EventHandler
-    public void onInventoryOpen(InventoryOpenEvent event){
-        if (!MENU_REGEX.matcher(event.getView().getTitle()).matches()){
-            return;
-        }
-//        Player player = (Player) event.getPlayer();
-//        Economy economy = NormalConversions.getEconomy();
-//        this.playerBalance.put(player.getUniqueId(), economy.getBalance(player));
-    }
 
     @EventHandler
     public void onClick(InventoryClickEvent event){
@@ -42,18 +26,8 @@ public class ConversionListener implements Listener {
         }
         event.setCancelled(true);
 
-//        Economy economy = NormalConversions.getEconomy();
         Player player = (Player) event.getWhoClicked();
 
-//        playerBalance.putIfAbsent(player.getUniqueId(), economy.getBalance(player));
-//        double cachedBalance = this.playerBalance.get(player.getUniqueId());
-//        double currentBalance = economy.getBalance(player);
-//
-//        if (cachedBalance != currentBalance){
-//            player.closeInventory();
-//            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYour balance has changed during this conversion, please try again!"));
-//            return;
-//        }
 
         PlayerConversion conversion = NormalConversions.getConversionManager().getPlayerConversion(player.getUniqueId());
         int moneyAmount = conversion.getAmount();

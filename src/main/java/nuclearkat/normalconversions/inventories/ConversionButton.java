@@ -28,7 +28,7 @@ public enum ConversionButton {
 		new Button(Material.ENCHANTED_BOOK, f("&c%s to %s &fConversion Rate:", from.getName(), to.getName()), f("&7[ &f1 : %.2f &7]", NormalConversions.getConversionRates().getConversionRate(from, to)))),
 
 	BUY((from, to, amount, p) ->
-		new Button(Material.GREEN_STAINED_GLASS_PANE, "&cClick To Buy!", f("&7 [ &c%s &7] ", NormalConversions.getConversionRates().getCost(from, to, amount)))),
+		new Button(Material.GREEN_STAINED_GLASS_PANE, "&cClick To Buy!", f("&7 [ &c%.2f &7] ", NormalConversions.getConversionRates().getCost(from, to, amount)))),
 
 	BALANCE((from, to, amount, p) ->
 		new Button(from.getMaterial(), f("&cYour %s balance &f: &7<&f %.2f &7>", from.getName(), from.getPlayerAmount(p))));

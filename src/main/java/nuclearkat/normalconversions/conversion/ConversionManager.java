@@ -18,6 +18,6 @@ public class ConversionManager {
 	}
 
 	public void setState(UUID player, Currency from, Currency to, int amount) {
-		playerStates.get(player).update(from, to, amount);
+		getPlayerConversion(player).update(from, to, amount);
 	}
 }
