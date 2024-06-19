@@ -38,10 +38,11 @@ public class Apple extends Currency {
 	private static void coinsEngineLoadReflection() {
 		try {
 			Class<?> coinsEngineAPI = Class.forName("su.nightexpress.coinsengine.api.CoinsEngineAPI");
-			Currency = coinsEngineAPI.getMethod("getCurrency").invoke(null, "ᴀᴘᴘʟᴇs");
-			getBalance = coinsEngineAPI.getMethod("getBalance");
-			addBalance = coinsEngineAPI.getMethod("addBalance");
-			removeBalance = coinsEngineAPI.getMethod("removeBalance");
+			Class<?> currencyClass = Class.forName("su.nightexpress.coinsengine.api.currency.Currency");
+			Currency = coinsEngineAPI.getMethod("getCurrency", String.class).invoke(null, "APPLE");
+			getBalance = coinsEngineAPI.getMethod("getBalance", Player.class, currencyClass);
+			addBalance = coinsEngineAPI.getMethod("addBalance", Player.class, currencyClass, double.class);
+			removeBalance = coinsEngineAPI.getMethod("removeBalance", Player.class, currencyClass, double.class);
 		} catch (ClassNotFoundException | InvocationTargetException |
 				 IllegalAccessException | NoSuchMethodException ex) {
 			ex.printStackTrace();
