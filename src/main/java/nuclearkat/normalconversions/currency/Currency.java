@@ -11,7 +11,6 @@ public abstract class Currency {
 		public Currency(Material material, String name) {
 			this.material = material;
 			this.name = name;
-
 		}
 
 		public String getName() {
