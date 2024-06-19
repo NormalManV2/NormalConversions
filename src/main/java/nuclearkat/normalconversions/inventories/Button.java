@@ -16,7 +16,7 @@ public class Button {
 
     public Button(Material materialType, String displayName, String... lore) {
         this.materialType = materialType;
-        this.displayName = displayName;
+        this.displayName = ChatColor.translateAlternateColorCodes('&', displayName);
         this.lore = new ArrayList<>();
         for (String string : lore){
             this.lore.add(ChatColor.translateAlternateColorCodes('&', string));
@@ -26,7 +26,7 @@ public class Button {
     public ItemStack getItemStack(){
         ItemStack stack = new ItemStack(materialType);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayName));
+        meta.setDisplayName(displayName);
         meta.setLore(lore);
         stack.setItemMeta(meta);
         return stack;
