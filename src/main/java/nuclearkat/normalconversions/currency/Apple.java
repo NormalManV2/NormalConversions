@@ -1,5 +1,6 @@
 package nuclearkat.normalconversions.currency;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -45,6 +46,7 @@ public class Apple extends Currency {
 			removeBalance = coinsEngineAPI.getMethod("removeBalance", Player.class, currencyClass, double.class);
 		} catch (ClassNotFoundException | InvocationTargetException |
 				 IllegalAccessException | NoSuchMethodException ex) {
+			Bukkit.getLogger().severe("Failed to load CoinsEngine reflection!");
 			ex.printStackTrace();
 		}
 	}
@@ -53,6 +55,7 @@ public class Apple extends Currency {
 		try {
 			return (double) getBalance.invoke(null, player, Currency);
 		} catch (InvocationTargetException | IllegalAccessException ex) {
+			Bukkit.getLogger().severe("Failed to get CoinEngine balance!");
 			ex.printStackTrace();
 		}
 		return 0;
@@ -62,6 +65,7 @@ public class Apple extends Currency {
 		try {
 			addBalance.invoke(null, player, Currency, amount);
 		} catch (InvocationTargetException | IllegalAccessException ex) {
+			Bukkit.getLogger().severe("Failed to add to CoinEngine balance!");
 			ex.printStackTrace();
 		}
 	}
@@ -70,6 +74,7 @@ public class Apple extends Currency {
 		try {
 			removeBalance.invoke(null, player, Currency, amount);
 		} catch (InvocationTargetException | IllegalAccessException ex) {
+			Bukkit.getLogger().severe("Failed to remove from CoinEngine balance!");
 			ex.printStackTrace();
 		}
 	}
